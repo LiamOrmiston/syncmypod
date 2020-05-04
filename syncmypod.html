@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SyncMyPod</title>
+    <style type="text/css">
+        .b1 {
+            width: 250px;
+            padding: 15px 32px;
+            text-align: center;
+            font-size: 16px;
+        }
+        .center {
+            margin: auto;
+            padding: 10px;
+            text-align: center;
+            width: 50%;
+       }
+    </style>
+    </head>
+    <body class="center">
+        <h1>Welcome to Sync my Pod!</h1>
+        <p>Author: Liam Ormiston</p>
+        <p>Copyright: All rights reserved</p>
+
+        <button type="button" class="b1" onclick="sync()">Sync</button>
+        <script type="application/javascript">
+            function sync() {
+                for ( var i = 0; i < 1e7; i++ ) {
+                    var time = new Date();
+                    var seconds = time.getSeconds();
+                    if ( seconds % 5 === 0 ){
+                        break;
+                    }
+                }
+                // clap();
+                beep();
+            }
+            /////////////////////////////////////////////////////////////////////////////////////////////
+            // source: https://stackoverflow.com/a/29641185
+            /////////////////////////////////////////////////////////////////////////////////////////////
+
+             //if you have another AudioContext class use that one, as some browsers have a limit
+             var audioCtx = new (window.AudioContext || window.webkitAudioContext || window.audioContext);
+             
+             //All arguments are optional:
+             
+             //duration of the tone in milliseconds. Default is 500
+             //frequency of the tone in hertz. default is 440
+             //volume of the tone. Default is 1, off is 0.
+             //type of tone. Possible values are sine, square, sawtooth, triangle, and custom. Default is sine.
+             //callback to use on end of tone
+             function beep(duration, frequency, volume, type, callback) {
+                 var oscillator = audioCtx.createOscillator();
+                 var gainNode = audioCtx.createGain();
+             
+                 oscillator.connect(gainNode);
+                 gainNode.connect(audioCtx.destination);
+             
+                 if (volume){gainNode.gain.value = volume;}
+                 if (frequency){oscillator.frequency.value = frequency;}
+                 if (type){oscillator.type = type;}
+                 if (callback){oscillator.onended = callback;}
+             
+                 oscillator.start(audioCtx.currentTime);
+                 oscillator.stop(audioCtx.currentTime + ((duration || 100) / 1000));
+             }
+            /////////////////////////////////////////////////////////////////////////////////////////////
+            // end of source
+            /////////////////////////////////////////////////////////////////////////////////////////////
+        </script>
+    </body>
+</html>
