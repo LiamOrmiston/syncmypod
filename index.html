@@ -57,7 +57,7 @@
                 var gainNode = audioCtx.createGain();
             
                 oscillator.connect(gainNode);
-                    gainNode.connect(audioCtx.destination);
+                gainNode.connect(audioCtx.destination);
             
                 if (volume){gainNode.gain.value = volume;}
                 if (frequency){oscillator.frequency.value = frequency;}
@@ -72,7 +72,7 @@
             /////////////////////////////////////////////////////////////////////////////////////////////
 
             function display_c(){
-                var refresh=1000; // Refresh rate in milli seconds
+                var refresh=500; // Refresh rate in milli seconds
                 mytime=setTimeout('display_ct()',refresh)
             }
                 
