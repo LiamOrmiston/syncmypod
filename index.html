@@ -23,7 +23,7 @@
         <p>Copyright: All rights reserved</p>
         <span id='ct'></span><br/>
 
-        <button type="button" class="b1" onclick="sync()">Sync</button>
+        <button type="button" class="b1" onclick="beep()">Sync</button>
         <script type="application/javascript">
             function sync() {
                 for ( var i = 0; i < 1e7; i++ ) {
@@ -36,7 +36,6 @@
                         display_ct();
                     }
                 }
-                beep();
             }
             /////////////////////////////////////////////////////////////////////////////////////////////
             // source: https://stackoverflow.com/a/29641185
@@ -63,6 +62,8 @@
                 if (frequency){oscillator.frequency.value = frequency;}
                 if (type){oscillator.type = type;}
                 if (callback){oscillator.onended = callback;}
+                
+                sync();
             
                 oscillator.start(audioCtx.currentTime);
                 oscillator.stop(audioCtx.currentTime + ((duration || 100) / 1000));
